@@ -1,0 +1,48 @@
+cd 
+mkdir MG
+cd MG
+git init 
+git config --global user.name ""
+git config --global user.email ""
+git config --list 
+nano app.txt
+# Escribir algo en el txt 
+git status
+git add app.txt
+git commit -m "Se inicia el seguimiento"
+git log
+git status
+
+git diff (tomar los 7 num o letra de los 2 git log)
+
+git branch 
+git branch Michael 
+git checkout Michael 
+
+git remote add origin https://github.com/WilsonJereKlein/actividad_semana3.git
+git config --list 
+git remote --verbose
+git push origin master
+ingresar nombre de github
+ingresar tocken github
+
+### Conectarse a otro github
+
+git clone https://github.com/Maxisisi/DEPRUEBA.git
+ls
+git config --global user.name ""
+git config --global user.email ""
+
+python3 -m venv app 
+source app/bin/activate
+
+pip install -r requeriments.txt
+ls
+
+nano app.txt 
+git add app.txt
+git commit -m "Si no ponen jere klein voy a ir a acostarme"
+git push origin master
+### ingresar usuario y tocken de githubm la cuenta del colaborador ###
+
+git pull origin master -> para sincronizar los archivos modificados
