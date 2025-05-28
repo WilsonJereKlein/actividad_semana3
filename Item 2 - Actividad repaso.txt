@@ -1,0 +1,31 @@
+mkdir EV2
+cd EV2
+
+mkdir juan
+cd juan
+
+nano index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mi Página Web</title>
+</head>
+<body>
+    <h1>¡Hola, esta es mi página en Docker!</h1>
+</body>
+</html>
+
+nano Dockerfile
+
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+EXPOSE 5030
+CMD ["nginx", "-g", "daemon off;"]
+
+docker build -t ev2_web .
+docker run -d -p 5030:80 --name contenedor_ev2 ev2_web
+
+http://localhost:5030
+
+docker ps
