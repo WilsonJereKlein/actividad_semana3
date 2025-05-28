@@ -1,0 +1,33 @@
+mkdir Teo
+cd Teo
+
+nano index.html 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Evaluación 2</title>
+</head>
+<body>
+    <h1>Integrantes</h1>
+    <ul>
+        <li>Nombre: Juan Pérez - RUT: 12.345.678-9</li>
+        <li>Nombre: María López - RUT: 98.765.432-1</li>
+    </ul>
+</body>
+</html>
+
+git init
+git checkout -b Evaluación2
+git add index.html
+git commit -m "Agregado index con nombres - Juan Pérez"
+
+git branch usuarionuevo
+
+3. Crear repo en GitHub llamado EV2
+Entra a GitHub → New Repository → Nombre: EV2.
+4. Crear y usar token clásico (7 días).
+GitHub → Settings → Developer Settings → Personal Access Tokens → Classic → Generate new token.
+
+git remote add origin https://github.com/usuario/EV2.git
+git push -u origin Evaluacion2
