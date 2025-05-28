@@ -1,0 +1,34 @@
+eva.sh
+
+#!/bin/bash
+
+cat <<EOF > Dockerfile
+FROM python:3.10-slim
+
+RUN mkdir -p /home/ev2
+WORKDIR /home/ev2
+
+COPY ev2.py /home/ev2/
+COPY templates /home/ev2/templates
+
+RUN pip install flask
+
+EXPOSE 5000
+
+CMD ["python", "ev2.py"]
+EOF
+
+echo "=== Creando imagen Docker ==="
+docker build -t ev2-image .
+
+echo "=== Ejecutando contenedor en puerto 5040 ==="
+docker run -d -p 5040:5000 --name ev2-container ev2-image
+
+chmod +x evaluacion.sh
+./evaluacion.sh
+
+docker ps
+docker build
+docker run
+
+localhost:5000
