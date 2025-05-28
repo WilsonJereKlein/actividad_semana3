@@ -1,0 +1,67 @@
+import requests
+
+API_KEY = 'TU_API_KEY_AQUI'
+BASE_URL = 'https://graphhopper.com/api/1/route'
+
+def obtener_ruta(origen, destino):
+    params = {
+        'point': [origen, destino],
+        'vehicle': 'car',
+        'locale': 'es',
+        'instructions': 'true',
+        'calc_points': 'true',
+        'key': API_KEY
+    }
+
+    print("\n[+] Enviando solicitud a la API de GraphHopper...")
+    response = requests.get(BASE_URL, params=params)
+    
+    if response.status_code == 200:
+        print("[✓] Respuesta recibida correctamente.")
+        data = response.json()
+        return data
+    else:
+        print(f"[✗] Error al conectar con la API. Código de estado: {response.status_code}")
+        return None
+
+def mostrar_resultados(data):
+    try:
+        path = data['paths'][0]
+        distancia_km = path['distance'] / 1000
+        tiempo_min = path['time'] / 60000
+        instrucciones = path['instructions']
+
+        print("\n--- RESULTADOS ---")
+        print(f"Distancia: {distancia_km:.2f} km")
+        print(f"Tiempo estimado: {tiempo_min:.2f} minutos")
+
+        print("\nNarrativa index 0:")
+        print(instrucciones[0]['text'])
+
+        if len(instrucciones) > 2:
+            print("\nNarrativa index 2:")
+            print(instrucciones[2]['text'])
+        else:
+            print("\nNo hay suficiente narrativa para mostrar el index 2.")
+    except KeyError:
+        print("[✗] No se pudieron extraer los datos de la respuesta.")
+
+def main():
+    print("=== SCRIPT DE RUTEO CON API GRAPHHOPPER ===")
+    
+    while True:
+        print("\nIngrese las coordenadas (latitud,longitud):")
+        origen = input("Punto de origen (ej: -33.4489,-70.6693): ").strip()
+        destino = input("Punto de destino (ej: -33.4569,-70.6483): ").strip()
+
+        datos = obtener_ruta(origen, destino)
+        if datos:
+            mostrar_resultados(datos)
+
+        continuar = input("\n¿Deseas calcular otra ruta? (s/n): ").lower()
+        if continuar != 's':
+            print("Saliendo del programa...")
+            break
+
+if __name__ == "__main__":
+    main()
